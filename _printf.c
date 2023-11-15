@@ -9,7 +9,7 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int i, cPrinted = 0;
+	int cPrinted = 0;
 
 	format_t arrFormat[] = {
 		{'c', char_format},
@@ -21,7 +21,6 @@ int _printf(const char *format, ...)
 		return (-1);
 
 	va_start(args, format);
-
 	while (*format != '\0')
 	{
 		if (*format != '%')
@@ -33,33 +32,50 @@ int _printf(const char *format, ...)
 		{
 			format++;
 			if (*format == '\0')
-				break;
-
-			if (*format == '%')
-			{
-				_putchar('%');
-				cPrinted++;
-			}
-			else
-			{
-				i = 0;
-				while (arrFormat[i].spc != '\0')
-				{
-					if (arrFormat[i].spc == *format)
-					{
-						cPrinted += arrFormat[i].p_format(args);					
-						break;
-					}
-					i++;
-				}
-			}
-			if (arrFormat[i].spc == '\0')
-			{
-				return (-1);
-			}
+				return (0);
+			cPrinted += select_format(&format, args, arrFormat);
 		}
 		format++;
 	}
 	va_end(args);
+	return (cPrinted);
+}
+
+/**
+  * select_format - select the the format.
+  * @str: a pointer to the formated string.
+  * @args: the list of argument.
+  * @arr: an array of struct.
+  *
+  * Return: the number of printed characters.
+  */
+int select_format(const char **str, va_list args, format_t *arr)
+{
+	int i = 0, cPrinted = 0;
+
+	if (**str == '%')
+	{
+		_putchar('%');
+		cPrinted++;
+		str++;
+	}
+	else
+	{
+		while (arr[i].spc != '\0')
+		{
+			if (arr[i].spc == **str)
+			{
+				cPrinted += arr[i].p_format(args);
+				break;
+			}
+			i++;
+		}
+		if (arr[i].spc == '\0')
+		{
+			_putchar('%');
+			_putchar(**str);
+			cPrinted += 2;
+		}
+	}
 	return (cPrinted);
 }

@@ -25,7 +25,9 @@ int str_format(va_list args)
 	int cPrinted = 0;
 	char *str = va_arg(args, char *);
 
-	cPrinted = _puts(str);
+	if (str == NULL)
+		cPrinted = _puts("(null)");
+	else
+		cPrinted = _puts(str);
 	return (cPrinted);
 }
-
