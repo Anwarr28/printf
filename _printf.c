@@ -17,33 +17,48 @@ int _printf(const char *format, ...)
 		{'\0', NULL}
 	};
 
+	if (format == NULL)
+		return (-1);
+
 	va_start(args, format);
 
-	while (format != NULL && *format != '\0')
+	while (*format != '\0')
 	{
-		if (*format == '%')
+		if (*format != '%')
+		{
+			_putchar(*format);
+			cPrinted++;
+		}
+		else
 		{
 			format++;
+			if (*format == '\0')
+				break;
+
 			if (*format == '%')
 			{
 				_putchar('%');
 				cPrinted++;
 				format++;
 			}
-			i = 0;
-			while (arrFormat[i].spc != '\0')
+			else
 			{
-				if (arrFormat[i].spc == *format)
+				i = 0;
+				while (arrFormat[i].spc != '\0')
 				{
-					cPrinted += arrFormat[i].p_format(args);
-break;
+					if (arrFormat[i].spc == *format)
+					{
+						cPrinted += arrFormat[i].p_format(args);					
+						break;
+					}
+					i++;
 				}
-				i++;
 			}
-			format++;
+			if (arrFormat[i].spc == '\0')
+			{
+				return (-1);
+			}
 		}
-		_putchar(*format);
-		cPrinted++;
 		format++;
 	}
 	va_end(args);
