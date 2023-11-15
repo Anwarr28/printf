@@ -25,7 +25,7 @@ int _strlen(char *str)
   *
   * Return: a pointerr to the string number.
   */
-char * _itoa(int n)
+char *_itoa(int n)
 {
 	int temp = n, dvd = 1, nChar = 1, i = 0;
 	char *p = NULL;
@@ -43,11 +43,9 @@ char * _itoa(int n)
 		dvd *= 10;
 		nChar++;
 	}
-	
 	p = malloc((nChar + 1) * sizeof(char));
 	if (p == NULL)
-		return(NULL);
-
+		return (NULL);
 	if (i == 1)
 		*p = '-';
 	while (i < nChar)

@@ -42,13 +42,12 @@ int str_format(va_list args)
 int int_format(va_list args)
 {
 	int cPrinted = 0, n = va_arg(args, int);
-	char *str = _itoi(n);
+	char *str = _itoa(n);
 
 	if (str == NULL)
 		return (0);
-	else
-		cPrinted = _puts(str);
+	cPrinted = _puts(str);
 
 	free(str);
 	return (cPrinted);
-
+}
