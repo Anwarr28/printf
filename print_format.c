@@ -49,5 +49,6 @@ int int_format(va_list args)
 	else
 		cPrinted = _puts(str);
 
+	free(str);
 	return (cPrinted);
 
