@@ -32,5 +32,6 @@ int _puts(char *str);
 
 /* assist functions */
 int _strlen(char *str);
+char * _itoa(int n);
 
 #endif /* MAIN_H */

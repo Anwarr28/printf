@@ -14,6 +14,8 @@ int _printf(const char *format, ...)
 	format_t arrFormat[] = {
 		{'c', char_format},
 		{'s', str_format},
+		{'i', int_format},
+		{'d', int_format},
 		{'\0', NULL}
 	};
 

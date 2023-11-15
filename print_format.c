@@ -32,3 +32,22 @@ int str_format(va_list args)
 
 	return (cPrinted);
 }
+
+/**
+  * int_format - prints a integer.
+  * @args: argument at the args variadic list.
+  *
+  * Return: the number of printed characters.
+  */
+int int_format(va_list args)
+{
+	int cPrinted = 0, n = va_arg(args, int);
+	char *str = _itoi(n);
+
+	if (str == NULL)
+		return (0);
+	else
+		cPrinted = _puts(str);
+
+	return (cPrinted);
+
