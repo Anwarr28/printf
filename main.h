@@ -35,6 +35,6 @@ int _puts(char *str);
 /* assist functions */
 int _strlen(char *str);
 char *_itoa(long int n);
-long int get_dvd(long int n, int *nChar);
+char *convert_str(long int n, long int dvd, int nChar, int isMin, int i);
 
 #endif /* MAIN_H */

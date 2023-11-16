@@ -27,9 +27,8 @@ int _strlen(char *str)
   */
 char *_itoa(long int n)
 {
-	int temp = n, dvd = 1, isMin = 0;
-	int nChar = 1, i = 0;
-	char *p = NULL;
+	long int temp = n, dvd = 1;
+	int isMin = 0, nChar = 1, i = 0;
 
 	if (n < 0)
 	{
@@ -49,7 +48,22 @@ char *_itoa(long int n)
 		dvd *= 10;
 		nChar++;
 	}
-	p = malloc((nChar + 1) * sizeof(char));
+	return (convert_str(n, dvd, nChar, isMin, i));
+}
+
+/**
+  * convert_str - convert a string to integer.
+  * @n: the number to be converted.
+  * @dvd: the number to divide n with.
+  * @nChar: number of characters needed to allocate memo.
+  * @isMin: check if the number is INT_MIN.
+  * @i: flag to print the -.
+  * Return: a pointer to the converted number.
+  */
+char *convert_str(long int n, long int dvd, int nChar, int isMin, int i)
+{
+	char *p = malloc((nChar + 1) * sizeof(char));
+
 	if (p == NULL)
 		return (NULL);
 	if (i == 1)
