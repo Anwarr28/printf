@@ -41,7 +41,9 @@ int str_format(va_list args)
   */
 int int_format(va_list args)
 {
-	int cPrinted = 0, n = va_arg(args, int);
+	int n = va_arg(args, long int);
+	int cPrinted = 0;
+
 	char *str = _itoa(n);
 
 	if (str == NULL)

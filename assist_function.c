@@ -25,13 +25,19 @@ int _strlen(char *str)
   *
   * Return: a pointerr to the string number.
   */
-char *_itoa(int n)
+char *_itoa(long int n)
 {
-	int temp = n, dvd = 1, nChar = 1, i = 0;
+	int temp = n, dvd = 1, isMin = 0;
+	int nChar = 1, i = 0;
 	char *p = NULL;
 
 	if (n < 0)
 	{
+		if (n == INT_MIN)
+		{
+			n++;
+			isMin = 1;
+		}
 		n *= -1;
 		temp = n;
 		i++;
@@ -50,6 +56,11 @@ char *_itoa(int n)
 		*p = '-';
 	while (i < nChar)
 	{
+		if (isMin == 1 && i == nChar - 1)
+		{
+			*(p + i) = n / dvd + '0';
+			i++;
+		}
 		*(p + i) = n / dvd + '0';
 		n %= dvd;
 		dvd /= 10;

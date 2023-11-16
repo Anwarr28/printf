@@ -6,6 +6,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <limits.h>
 
 /**
   * struct format - for handling format specifiers.
@@ -33,6 +34,7 @@ int _puts(char *str);
 
 /* assist functions */
 int _strlen(char *str);
-char * _itoa(int n);
+char *_itoa(long int n);
+long int get_dvd(long int n, int *nChar);
 
 #endif /* MAIN_H */
