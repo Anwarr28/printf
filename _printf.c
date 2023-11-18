@@ -34,7 +34,7 @@ int _printf(const char *format, ...)
 		{
 			format++;
 			if (*format == '\0')
-				return (0);
+				return (-1);
 			cPrinted += select_format(&format, args, arrFormat);
 		}
 		format++;

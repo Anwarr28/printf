@@ -72,8 +72,9 @@ char *convert_str(long int n, long int dvd, int nChar, int isMin, int i)
 	{
 		if (isMin == 1 && i == nChar - 1)
 		{
-			*(p + i) = n / dvd + '0';
+			*(p + i) = n / dvd + '1';
 			i++;
+			continue;
 		}
 		*(p + i) = n / dvd + '0';
 		n %= dvd;
