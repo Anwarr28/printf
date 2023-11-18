@@ -88,7 +88,7 @@ char *base_convertor(long int n, int base)
 
 	if (base == 2)
 	{
-		len = log2(n) + 2;
+		len = _log(n, base) + 2;
 		str = malloc(sizeof(char) * len);
 		if (str == NULL)
 			return (NULL);
@@ -123,4 +123,23 @@ char *reverse_str(char *str)
 		str[len - 1] = temp;
 	}
 	return (str);
+}
+
+/**
+ * _log - calculates the base-2 logarithm of a number
+ * @n: the number to calculate the logarithm of
+ * @base: the base will be used.
+ *
+ * Return: the base logarithm of n
+ */
+int _log(long int n, int base)
+{
+	int log = 0;
+
+	while (n > 1)
+	{
+		n /= base;
+		log++;
+	}
+	return (log);
 }

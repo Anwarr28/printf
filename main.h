@@ -7,7 +7,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <limits.h>
-#include <math.h>
 
 /**
   * struct format - for handling format specifiers.
@@ -40,5 +39,6 @@ char *_itoa(long int n);
 char *convert_str(long int n, long int dvd, int nChar, int i);
 char *reverse_str(char *str);
 char *base_convertor(long int n, int base);
+int _log(long int n, int base);
 
 #endif /* MAIN_H */
