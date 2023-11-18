@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <math.h>
 
 /**
   * struct format - for handling format specifiers.
@@ -27,6 +28,7 @@ int select_format(const char **str, va_list args, format_t *arr);
 int char_format(va_list args);
 int str_format(va_list args);
 int int_format(va_list args);
+int binary_format(va_list args);
 
 /* print to standard output functions */
 int _putchar(char c);
@@ -35,6 +37,8 @@ int _puts(char *str);
 /* assist functions */
 int _strlen(char *str);
 char *_itoa(long int n);
-char *convert_str(long int n, long int dvd, int nChar, int isMin, int i);
+char *convert_str(long int n, long int dvd, int nChar, int i);
+char *reverse_str(char *str);
+char *base_convertor(long int n, int base);
 
 #endif /* MAIN_H */

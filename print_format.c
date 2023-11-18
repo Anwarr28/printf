@@ -41,10 +41,30 @@ int str_format(va_list args)
   */
 int int_format(va_list args)
 {
-	int n = va_arg(args, long int);
+	int n = va_arg(args, int);
 	int cPrinted = 0;
 
 	char *str = _itoa(n);
+
+	if (str == NULL)
+		return (0);
+	cPrinted = _puts(str);
+
+	free(str);
+	return (cPrinted);
+}
+
+/**
+  * binary_format - prints a number in binary.
+  * @args: argument at the args variadic list.
+  *
+  * Return: the number of printed characters.
+  */
+int binary_format(va_list args)
+{
+	int n = va_arg(args, int);
+	int cPrinted = 0;
+	char *str = base_convertor(n, 2);
 
 	if (str == NULL)
 		return (0);

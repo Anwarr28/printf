@@ -28,15 +28,10 @@ int _strlen(char *str)
 char *_itoa(long int n)
 {
 	long int temp = n, dvd = 1;
-	int isMin = 0, nChar = 1, i = 0;
+	int nChar = 1, i = 0;
 
 	if (n < 0)
 	{
-		if (n == INT_MIN)
-		{
-			n++;
-			isMin = 1;
-		}
 		n *= -1;
 		temp = n;
 		i++;
@@ -48,7 +43,7 @@ char *_itoa(long int n)
 		dvd *= 10;
 		nChar++;
 	}
-	return (convert_str(n, dvd, nChar, isMin, i));
+	return (convert_str(n, dvd, nChar, i));
 }
 
 /**
@@ -56,11 +51,11 @@ char *_itoa(long int n)
   * @n: the number to be converted.
   * @dvd: the number to divide n with.
   * @nChar: number of characters needed to allocate memo.
-  * @isMin: check if the number is INT_MIN.
   * @i: flag to print the -.
+  *
   * Return: a pointer to the converted number.
   */
-char *convert_str(long int n, long int dvd, int nChar, int isMin, int i)
+char *convert_str(long int n, long int dvd, int nChar, int i)
 {
 	char *p = malloc((nChar + 1) * sizeof(char));
 
@@ -70,12 +65,6 @@ char *convert_str(long int n, long int dvd, int nChar, int isMin, int i)
 		*p = '-';
 	while (i < nChar)
 	{
-		if (isMin == 1 && i == nChar - 1)
-		{
-			*(p + i) = n / dvd + '1';
-			i++;
-			continue;
-		}
 		*(p + i) = n / dvd + '0';
 		n %= dvd;
 		dvd /= 10;
@@ -83,4 +72,55 @@ char *convert_str(long int n, long int dvd, int nChar, int isMin, int i)
 	}
 	*(p + i) = '\0';
 	return (p);
+}
+
+/**
+  * base_convertor - turns a decimal number to the specified base.
+  * @n: the number to be converted.
+  * @base: the base of the converted number.
+  *
+  * Rrturn: a pointer to a string of the converted number.
+  */
+char *base_convertor(long int n, int base)
+{
+	char *str = NULL;
+	int len, i = 0;
+
+	if (base == 2)
+	{
+		len = log2(n) + 2;
+		str = malloc(sizeof(char) * len);
+		if (str == NULL)
+			return (NULL);
+
+		while (i < len - 1)
+		{
+			*(str + i) = n % base + '0';
+			n /= base;
+			i++;
+		}
+		*(str + i) = '\0';
+		reverse_str(str);
+	}
+	return (str);
+}
+
+/**
+  * reverse_str - rotates a string.
+  * @str: a pointer to the string to be rotated.
+  *
+  * Return: a pointer to the rotated string.
+  */
+char *reverse_str(char *str)
+{
+	char temp;
+	int i, len = _strlen(str);
+
+	for (i = 0; i < (len - 1) / 2; i++, len--)
+	{
+		temp = str[i];
+		str[i] = str[len - 1];
+		str[len - 1] = temp;
+	}
+	return (str);
 }
